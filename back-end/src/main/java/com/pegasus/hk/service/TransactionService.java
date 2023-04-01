@@ -29,7 +29,10 @@ public class TransactionService {
         this.transactionMapper = transactionMapper;
     }
 
-    public List<TransactionDto> getPersonTransactions(Long id) {
-        return transactionRepository.findAll(QTransaction.transaction.personId.eq(id), Pageable.unpaged()).stream().map(transactionMapper::toTransactionDto).collect(Collectors.toList());
+    public List<TransactionDto> getPersonTransactions(Pageable pageable, Long id, String monthFilter) {
+        return transactionRepository.findAll(QTransaction.transaction.personId.eq(id), pageable)
+                .stream()
+                .map(transactionMapper::toTransactionDto)
+                .collect(Collectors.toList());
     }
 }
