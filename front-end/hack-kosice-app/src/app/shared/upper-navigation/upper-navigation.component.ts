@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { faBell, faLongArrowAltRight  } from '@fortawesome/free-solid-svg-icons';
+import { Person } from '../models/person.model';
 
 
 @Component({
@@ -12,9 +13,12 @@ export class UpperNavigationComponent implements OnInit {
   faBell = faBell;
   faLongArrowAltRight=faLongArrowAltRight;
 
+  @Input() currentPerson: Person;
+
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }

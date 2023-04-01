@@ -27,6 +27,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ChatMessageComponent } from './side-advisor/chat-message/chat-message.component';
 import { BalancePreviewComponent } from './balance-preview/balance-preview.component';
 import { CoreModule } from './core/core.module';
+import { TableModule } from 'primeng/table';
 @NgModule({
   declarations: [
     AppComponent,
