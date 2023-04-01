@@ -1,0 +1,5 @@
+<div *ngFor="let message of messages">
+  <div [ngClass]="{'me': message.key, 'other': !message.key}">
+    {{ message.value }}
+  </div>
+</div>

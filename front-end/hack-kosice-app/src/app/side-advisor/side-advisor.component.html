@@ -1,3 +1,25 @@
 <div class="side-advisor-container">
-  
+  <h1>Financial Advisor</h1>
+  <div class="chat-input-container">
+    <input class="c-checkbox" type="checkbox" id="checkbox" />
+    <div class="c-formContainer">
+      <form class="c-form" action="">
+        <input
+          class="c-form__input"
+          placeholder="Tell me what's on your hearth!"
+          type="email"
+          pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
+          required
+        />
+        <label class="c-form__buttonLabel" for="checkbox">
+          <button class="c-form__button" type="button">
+            <fa-icon [icon]="faPaperPlane"></fa-icon>
+          </button>
+        </label>
+        <label class="c-form__toggle" for="checkbox">
+          <fa-icon [icon]="faPaperPlane"></fa-icon
+        ></label>
+      </form>
+    </div>
+  </div>
 </div>

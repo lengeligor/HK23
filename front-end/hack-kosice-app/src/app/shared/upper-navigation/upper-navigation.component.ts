@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-upper-navigation',
@@ -6,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./upper-navigation.component.scss']
 })
 export class UpperNavigationComponent implements OnInit {
+
+  faPaperPlane = faPaperPlane;
 
   constructor() { }
 

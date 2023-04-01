@@ -1,7 +1,14 @@
 <div class="side-navbar">
   <div class="main-icons">
-    <fa-icon [icon]="faHome"></fa-icon>
-    <fa-icon [icon]="faClipboardList"></fa-icon>
+    <fa-icon
+      [routerLink]="['/dashboard']"
+      [icon]="faHome"
+      style="color: #4363bc"
+    ></fa-icon>
+    <fa-icon
+      [routerLink]="['/balance-preview']"
+      [icon]="faClipboardList"
+    ></fa-icon>
     <fa-icon [icon]="faWallet"></fa-icon>
     <fa-icon [icon]="faChartLine"></fa-icon>
   </div>

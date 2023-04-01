@@ -24,13 +24,17 @@ import { UpperNavigationComponent } from './shared/upper-navigation/upper-naviga
 import { MainContentComponent } from './main-content/main-content.component';
 import { SideAdvisorComponent } from './side-advisor/side-advisor.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ChatMessageComponent } from './side-advisor/chat-message/chat-message.component';
+import { BalancePreviewComponent } from './balance-preview/balance-preview.component';
 @NgModule({
   declarations: [
     AppComponent,
     SideNavigationComponent,
     UpperNavigationComponent,
     MainContentComponent,
-    SideAdvisorComponent
+    SideAdvisorComponent,
+    ChatMessageComponent,
+    BalancePreviewComponent,
   ],
   imports: [
     BrowserModule,

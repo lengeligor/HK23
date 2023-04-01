@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-side-advisor',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./side-advisor.component.scss']
 })
 export class SideAdvisorComponent implements OnInit {
+
+  faPaperPlane = faPaperPlane;
+
 
   constructor() { }
 
