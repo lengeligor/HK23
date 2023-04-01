@@ -1,0 +1,39 @@
+<div class="balance-preview-container">
+  <h1>Tables</h1>
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th>Id:</th>
+        <th>UserId:</th>
+        <th>Date:</th>
+        <th>Category:</th>
+        <th>SubCategory:</th>
+        <th>Description:</th>
+        <th>Amount:</th>
+        <th>Type:</th>
+        <th>BalanceBefore:</th>
+        <th>BalanceAfter:</th>
+        <th>Label:</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let transaction of transactionList$"
+        [ngStyle]="{ color: false ? 'red' : 'back' }"
+      >
+        <td>{{ transaction.id }}</td>
+        <td>{{ transaction.personId }}</td>
+        <td>{{ transaction.date }}</td>
+        <td>{{ transaction.category }}</td>
+        <td>{{ transaction.subcategory }}</td>
+        <td>{{ transaction.description }}</td>
+        <td>{{ transaction.amount }}</td>
+        <td>{{ transaction.type }}</td>
+        <td>{{ transaction.balanceBefore }}</td>
+        <td>{{ transaction.balanceAfter }}</td>
+        <td>{{ transaction.label }}</td>
+      </tr>
+      <!-- and so on... -->
+    </tbody>
+  </table>
+</div>
