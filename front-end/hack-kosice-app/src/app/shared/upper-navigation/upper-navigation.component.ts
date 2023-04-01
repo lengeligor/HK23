@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { faBell, faLongArrowAltRight  } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -9,7 +9,8 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 })
 export class UpperNavigationComponent implements OnInit {
 
-  faPaperPlane = faPaperPlane;
+  faBell = faBell;
+  faLongArrowAltRight=faLongArrowAltRight;
 
   constructor() { }
 
