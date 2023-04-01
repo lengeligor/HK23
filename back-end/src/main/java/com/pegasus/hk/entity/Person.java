@@ -30,12 +30,6 @@ public class Person implements Serializable {
 
     private String lastname;
 
-    private String email;
-
-    private String password;
-
-    private String type;
-
     private String gender;
 
     private Long age;
