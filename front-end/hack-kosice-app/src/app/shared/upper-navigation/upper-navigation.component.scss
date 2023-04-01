@@ -10,5 +10,40 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: right;
+}
+
+img {
+  border-radius: 50%;
+  width: 50px;
+}
+
+p{
+
+  font-size: 1.5em;
+  margin: 0;
+  margin-left: 0.5%;
+  color: $inactive-icon-color;
+}
+
+.icon{
+  font-size: 28px;
+  margin-left:2% ;
+  margin-right: 2%;
+  color: $inactive-icon-color;
+  transition: 0.1s linear;
+  cursor: pointer;
+
+  &:hover {
+    color: $active-icon-color;
+  }
+
+}
+
+
+
+#notification{
+  font-size: 28px;
+  margin-right: 4%;
+  color: $inactive-icon-color;
 }

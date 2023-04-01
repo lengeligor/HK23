@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { Component, Input, OnInit } from '@angular/core';
+import { faBell, faLongArrowAltRight  } from '@fortawesome/free-solid-svg-icons';
+import { Person } from '../models/person.model';
 
 
 @Component({
@@ -9,11 +10,15 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 })
 export class UpperNavigationComponent implements OnInit {
 
-  faPaperPlane = faPaperPlane;
+  faBell = faBell;
+  faLongArrowAltRight=faLongArrowAltRight;
+
+  @Input() currentPerson: Person;
 
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }

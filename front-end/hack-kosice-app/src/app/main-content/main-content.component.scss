@@ -8,10 +8,21 @@
   min-height: 100%;
   background-color: $main-background-color;
   padding: 30px;
-  background-color: red;
+
 
   h1 {
     font-family: "Poppins", sans-serif;
     font-weight: 700;
   }
+}
+
+#divChart{
+  display: block;
+  width: 400px;
+  height: 400px;
+}
+
+.donut{
+  width: 400px; 
+  height: 400px;
 }

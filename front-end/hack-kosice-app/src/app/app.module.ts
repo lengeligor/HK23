@@ -26,6 +26,8 @@ import { SideAdvisorComponent } from './side-advisor/side-advisor.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ChatMessageComponent } from './side-advisor/chat-message/chat-message.component';
 import { BalancePreviewComponent } from './balance-preview/balance-preview.component';
+import { CoreModule } from './core/core.module';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +57,8 @@ import { BalancePreviewComponent } from './balance-preview/balance-preview.compo
     MdbTooltipModule,
     MdbValidationModule,
     BrowserAnimationsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
