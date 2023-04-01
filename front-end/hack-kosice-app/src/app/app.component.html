@@ -1,7 +1,7 @@
 <div class="app-main-container">
   <app-side-navigation></app-side-navigation>
   <app-upper-navigation></app-upper-navigation>
-
+  <app-upper-navigation [currentPerson]="person$"></app-upper-navigation>
   <app-side-advisor></app-side-advisor>
   <div class="main-content">
     <router-outlet></router-outlet>

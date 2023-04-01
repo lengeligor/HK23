@@ -1,8 +1,8 @@
-<div class="upper-nav">
+<div class="upper-nav" *ngIf="currentPerson">
     <fa-icon  id="notification" [icon]="faBell"></fa-icon>
     
     <img src="../../../assets/img/avatar.png" alt="Avatar" class="avatar">
-    <p>Joe Doe</p>
+    <p>{{currentPerson.name}} {{currentPerson.lastname}}</p>
     
     <i class="fa-solid fa-right-from-bracket icon"></i>
     
