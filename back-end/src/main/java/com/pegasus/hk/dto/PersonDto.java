@@ -11,12 +11,6 @@ public class PersonDto {
 
     private String lastname;
 
-    private String email;
-
-    private String password;
-
-    private String type;
-
     private String gender;
 
     private Long age;
