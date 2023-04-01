@@ -1,5 +1,4 @@
-import { Address } from "./address.model";
-
+import { Address } from './address.model';
 
 export interface Person {
   id: number;
