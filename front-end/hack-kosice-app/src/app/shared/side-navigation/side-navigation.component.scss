@@ -1,0 +1,35 @@
+@import "../../../assets/colors";
+
+.side-navbar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100px;
+  height: 100vh;
+  background-color: $snow-white-color;
+  z-index: 2;
+
+  .main-icons {
+    position: absolute;
+    top: 80px;
+    width: 100px;
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    fa-icon {
+      font-size: 40px;
+      color: $inactive-icon-color;
+      transition: 0.1s linear;
+
+      &:hover {
+        color: $active-icon-color;
+      }
+
+    }
+
+
+  }
+}

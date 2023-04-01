@@ -1,0 +1,10 @@
+@import "../../assets/colors";
+
+.main-content-container {
+  position: fixed;
+  top: 80px;
+  left: 100px;
+  width: 70%;
+  min-height: 90%;
+  background-color: $main-background-color;
+}

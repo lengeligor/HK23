@@ -19,10 +19,18 @@ import { MdbTabsModule } from 'mdb-angular-ui-kit/tabs';
 import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { SideNavigationComponent } from './shared/side-navigation/side-navigation.component';
+import { UpperNavigationComponent } from './shared/upper-navigation/upper-navigation.component';
+import { MainContentComponent } from './main-content/main-content.component';
+import { SideAdvisorComponent } from './side-advisor/side-advisor.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SideNavigationComponent,
+    UpperNavigationComponent,
+    MainContentComponent,
+    SideAdvisorComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +50,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MdbTabsModule,
     MdbTooltipModule,
     MdbValidationModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
