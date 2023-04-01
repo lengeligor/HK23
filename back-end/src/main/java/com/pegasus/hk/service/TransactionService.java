@@ -1,9 +1,16 @@
 package com.pegasus.hk.service;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import com.pegasus.hk.client.BotClient;
@@ -12,13 +19,16 @@ import com.pegasus.hk.dto.ReportDto;
 import com.pegasus.hk.dto.TransactionDto;
 import com.pegasus.hk.entity.QTransaction;
 import com.pegasus.hk.entity.Transaction;
-import com.pegasus.hk.exceptions.BusinessException;
 import com.pegasus.hk.mapper.TransactionMapper;
-import com.pegasus.hk.model.request.ChatGptRequest;
 import com.pegasus.hk.model.request.MessageRequest;
 import com.pegasus.hk.model.response.ChatGptResponse;
 import com.pegasus.hk.repository.TransactionRepository;
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.dsl.Expressions;
+import com.querydsl.jpa.JPAExpressions;
+import com.querydsl.jpa.JPQLQueryFactory;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.querydsl.core.types.dsl.Expressions.*;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -36,14 +46,18 @@ public class TransactionService {
     private final BotClient botClient;
     private final PersonService personService;
 
+    private final EntityManager entityManager;
+
     public TransactionService(@NonNull TransactionRepository transactionRepository,
                               @NonNull TransactionMapper transactionMapper,
                               @NonNull BotClient botClient,
-                              @NonNull PersonService personService){
+                              @NonNull PersonService personService,
+                              @NonNull EntityManager entityManager){
         this.transactionRepository = transactionRepository;
         this.transactionMapper = transactionMapper;
         this.botClient = botClient;
         this.personService = personService;
+        this.entityManager = entityManager;
     }
 
     public List<TransactionDto> getPersonTransactions(Pageable pageable, Long id, String monthFilter) {
@@ -81,12 +95,27 @@ public class TransactionService {
         ReportDto reportDto = transactionMapper.toReportDto(transactions);
         MessageRequest messageRequest = new MessageRequest();
         PersonDto personDto = personService.getPerson(id);
-        String message = "sk: Akú radu by si dal " + personDto.getName() + " " + personDto.getLastname()
+        HashMap<String, Long> sortedExpanses = new HashMap<>();
+        sortedExpanses.put("cestovanie", reportDto.getTravel());
+        sortedExpanses.put("úžitkové veci", reportDto.getUtilities());
+        sortedExpanses.put("doprava", reportDto.getTransportation());
+        sortedExpanses.put("nakupovanie", reportDto.getShopping());
+        sortedExpanses.put("darčeky", reportDto.getGifts());
+        sortedExpanses.put("pravidelné odbery(subscription)", reportDto.getSubscription());
+        sortedExpanses.put("jedlo", reportDto.getFood());
+        sortedExpanses = sortByValue(sortedExpanses);
+        String message = "sk: Aké rady by si dal " + personDto.getName() + " " + personDto.getLastname()
                 + ", ktorý je muž, má " + personDto.getAge() + " rokov, býva v " + personDto.getAddress().getMunicipality()+ ","
                 + personDto.getAddress().getState() + "a jeho finančná situácia za obdobie posledných "
                 + analysisDuration + " mesiacov je následovná : " + personDto.getName() + " má príjmy vo výške " + reportDto.getIncomes()
                 + ", výdaje vo výške " + reportDto.getExpenses() + ", jeho +/- bilancia je na úrovni " + reportDto.getRemainingFinances()
-                + "eur. " + "Napíš to v prvej osobe.";
+                + "eur. Jeho výdaje podľa kategórii vyzerajú takto: ";
+        for (Map.Entry<String, Long> entry : sortedExpanses.entrySet()) {
+            String key = entry.getKey();
+            Long value = entry.getValue();
+            message = message + key + ": " + value + " eur,";
+        }
+        message = message + "Napíš to v prvej osobe.";
         messageRequest.setMessage(message);
         ChatGptResponse response = botClient.askQuestion(messageRequest);
         Optional.ofNullable(response)
@@ -97,5 +126,32 @@ public class TransactionService {
                     }
         });
         return reportDto;
+    }
+
+    public static HashMap<String, Long> sortByValue(HashMap<String, Long> hm) {
+        List<Map.Entry<String, Long> > list =
+                new LinkedList<Map.Entry<String, Long> >(hm.entrySet());
+
+        Collections.sort(list, new Comparator<Map.Entry<String, Long> >() {
+            public int compare(Map.Entry<String, Long> o1,
+                               Map.Entry<String, Long> o2)
+            {
+                return (o1.getValue()).compareTo(o2.getValue());
+            }
+        });
+
+        HashMap<String, Long> temp = new LinkedHashMap<String, Long>();
+        for (Map.Entry<String, Long> aa : list) {
+            temp.put(aa.getKey(), aa.getValue());
+        }
+        return temp;
+    }
+
+    public HashMap<String, Long> getPersonYearlyBalance(Long id, Long year) {
+        HashMap<String, Long> result = new HashMap<>();
+        List<Transaction> transactions = transactionRepository.getPersonYearlyBalance(id);
+        transactions.forEach(t ->
+                result.put(t.getDate(), t.getBalanceBefore()));
+        return result;
     }
 }
