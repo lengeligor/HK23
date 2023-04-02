@@ -18,7 +18,7 @@ export class UpperNavigationComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    
+    console.log("cigani boha");
   }
 
 }

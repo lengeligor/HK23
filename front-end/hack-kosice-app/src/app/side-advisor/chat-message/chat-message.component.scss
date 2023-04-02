@@ -1,17 +1,28 @@
+@import "../../../assets/colors";
+
+.chat-message {
+  font-size: 20px;
+  font-weight: 400;
+  margin: 10px;
+  padding: 25px 20px 13px 20px;
+  border-radius: 40px;
+  animation:pop-in 0.5s;
+}
+
 .me {
   text-align: right;
-  color: white;
-  background-color: dodgerblue;
-  margin: 10px;
-  padding: 10px;
-  border-radius: 5px;
+  color: black;
+  border: 2px solid $active-icon-color;
 }
 
 .other {
   text-align: left;
   color: black;
-  background-color: lightgray;
-  margin: 10px;
-  padding: 10px;
-  border-radius: 5px;
+  border: 1px solid $inactive-icon-color
+}
+
+
+@keyframes pop-in {
+  0% { opacity: 0; transform: scale(0.1); }
+  100% { opacity: 1; transform: scale(1); }
 }

@@ -20,6 +20,10 @@ export class BalancePreviewComponent implements OnInit {
     this._getTransactionList(1)
   }
 
+  isIncome(amount: string): boolean {
+    return amount.includes('-');
+  }
+
 
 
   private _getTransactionList(id: number): void{
@@ -30,4 +34,6 @@ export class BalancePreviewComponent implements OnInit {
        console.log(transactionList);
     });
   }
+
+
 }

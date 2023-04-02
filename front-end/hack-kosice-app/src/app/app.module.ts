@@ -27,6 +27,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ChatMessageComponent } from './side-advisor/chat-message/chat-message.component';
 import { BalancePreviewComponent } from './balance-preview/balance-preview.component';
 import { CoreModule } from './core/core.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { CoreModule } from './core/core.module';
     BalancePreviewComponent,
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     MdbAccordionModule,

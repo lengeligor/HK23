@@ -1,5 +1,6 @@
 <div *ngFor="let message of messages">
-  <div [ngClass]="{'me': message.key, 'other': !message.key}">
-    {{ message.value }}
+  <div class="chat-message" [ngClass]="{'me': message.key, 'other': !message.key}">
+    <p *ngIf="message.key">{{ message.value }}: Me</p>
+    <p *ngIf="!message.key">Chat: {{ message.value }}</p>
   </div>
 </div>
