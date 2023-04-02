@@ -1,0 +1,91 @@
+@import "../../assets/colors";
+
+.container{
+    padding: 1vw;
+}
+
+.container_for_2{
+    display: flex;
+    
+}
+
+
+
+
+
+
+.card{
+    width: 48%;
+    margin: 2%;
+    height: 23em;
+    border-radius: 20px;
+    border: none;
+    animation: pop-in 0.7s;
+}
+
+.card .detail{
+    position: absolute;
+    right: 5%;
+    top: 5%;
+    color: $color-lable;
+
+ 
+}
+
+.main_info{
+    display: flex;
+}
+
+.card img{
+    width: 30%;
+    padding: 5%;
+    height: auto;
+    border-radius: 50%;
+    object-fit: contain;
+
+}
+
+
+.main_info .text{
+    margin-top: 10%;
+
+}
+
+.add_info{
+    margin: 5%;
+}
+
+.detail:hover{
+    cursor: pointer;
+}
+
+button{
+    background-color: $active-icon-color;
+    border: none;
+    width: 30%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 2%;
+    color: $snow-white-color;
+    border-radius: 20px  20px 0px 20px;
+ 
+}
+
+.text h1{
+    border-bottom: 1px solid $color-main-text;
+    width: 150%;
+    
+}
+
+@keyframes pop-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.1);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  

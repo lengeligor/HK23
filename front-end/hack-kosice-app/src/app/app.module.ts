@@ -28,6 +28,8 @@ import { ChatMessageComponent } from './side-advisor/chat-message/chat-message.c
 import { BalancePreviewComponent } from './balance-preview/balance-preview.component';
 import { CoreModule } from './core/core.module';
 import { FormsModule } from '@angular/forms';
+import { FinacialExpertsComponent } from './finacial-experts/finacial-experts.component';
+import { LearningComponent } from './learning/learning.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { FormsModule } from '@angular/forms';
     SideAdvisorComponent,
     ChatMessageComponent,
     BalancePreviewComponent,
+    FinacialExpertsComponent,
+    LearningComponent,
   ],
   imports: [
     FormsModule,

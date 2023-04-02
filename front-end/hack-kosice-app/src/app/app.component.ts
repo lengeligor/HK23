@@ -20,6 +20,7 @@ export class AppComponent implements OnInit, OnDestroy {
   person$: Person;
   transactionList$: Transaction[];
   userReport$: UserReport;
+  userYearBalance$: { key: string; value: number }[];
 
   constructor(
     private mainService: MainServiceService,
@@ -29,6 +30,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this._getUser(this.currentUserId);
     this._getUserReport(this.currentUserId);
+    this._getUserYearBalance(this.currentUserId);
   }
 
   ngOnDestroy(): void {
@@ -51,6 +53,15 @@ export class AppComponent implements OnInit, OnDestroy {
     .subscribe((report) => {
       this.userReport$ = report;
        console.log(report);
+    });
+  }
+
+  private _getUserYearBalance(id: number): void{
+    this.mainService.getUserYearBalance(id)
+    .pipe(takeUntil(this.$unsubscribe))
+    .subscribe((yearBalance) => {
+      this.userYearBalance$ = yearBalance;
+       console.log(yearBalance);
     });
   }
 
