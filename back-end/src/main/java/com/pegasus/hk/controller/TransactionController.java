@@ -1,5 +1,6 @@
 package com.pegasus.hk.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.pegasus.hk.dto.ReportDto;
@@ -37,5 +38,10 @@ public class TransactionController {
     public ResponseEntity<ReportDto> getPersonReport(@PathVariable Long id, @RequestParam(required = false) Long analysisDuration){
         if (analysisDuration == null) analysisDuration =3L;
         return ResponseEntity.ok(transactionService.getAnalysisReport(id, analysisDuration));
+    }
+
+    @GetMapping("/person/{id}/year-balance")
+    public ResponseEntity<HashMap<String,Long>> getPersonYearlyBalance(@PathVariable Long id, @RequestParam(required = false)Long year){
+        return ResponseEntity.ok(transactionService.getPersonYearlyBalance(id, year));
     }
 }
