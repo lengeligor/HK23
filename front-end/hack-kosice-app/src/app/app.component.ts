@@ -4,6 +4,7 @@ import { Observable, Subject, takeUntil } from 'rxjs';
 import { MainServiceService } from './shared/main-service.service';
 import { Person } from './shared/models/person.model';
 import { Transaction } from './shared/models/transaction.model';
+import { UserReport } from './shared/models/userReport.model';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   person$: Person;
   transactionList$: Transaction[];
+  userReport$: UserReport;
 
   constructor(
     private mainService: MainServiceService,
@@ -26,6 +28,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this._getUser(this.currentUserId);
+    this._getUserReport(this.currentUserId);
   }
 
   ngOnDestroy(): void {
@@ -38,7 +41,16 @@ export class AppComponent implements OnInit, OnDestroy {
     .pipe(takeUntil(this.$unsubscribe))
     .subscribe((user) => {
       this.person$ = user;
-      // console.log(user);
+       console.log(user);
+    });
+  }
+
+  private _getUserReport(id: number): void{
+    this.mainService.getUserReport(id)
+    .pipe(takeUntil(this.$unsubscribe))
+    .subscribe((report) => {
+      this.userReport$ = report;
+       console.log(report);
     });
   }
 
