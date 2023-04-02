@@ -8,6 +8,7 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 
 import com.pegasus.hk.client.BotClient;
 import com.pegasus.hk.model.request.MessageRequest;
@@ -45,14 +46,19 @@ public class LearningService {
     public MessageRequest getThemeMaterial(String theme) {
         MessageRequest messageRequest = new MessageRequest();
         messageRequest.setMessage("generate content about " + theme +". Response must be smaller than 16-bit Unicode characters.");
-        ChatGptResponse response = botClient.askQuestion(messageRequest);
-        Optional.ofNullable(response)
-                .flatMap(r -> Optional.ofNullable(r.getChoices()))
-                .ifPresent(choices -> {
-                    if (!choices.isEmpty()){
-                        messageRequest.setMessage(choices.get(0).getText());
-                    }
-                });
+        try {
+            ChatGptResponse response = botClient.askQuestion(messageRequest);
+            Optional.ofNullable(response)
+                    .flatMap(r -> Optional.ofNullable(r.getChoices()))
+                    .ifPresent(choices -> {
+                        if (!choices.isEmpty()) {
+                            messageRequest.setMessage(choices.get(0).getText());
+                        }
+                    });
+        } catch (
+                HttpClientErrorException e) {
+            messageRequest.setMessage("Our services are temporary unavailable. Try later.");
+        }
         return messageRequest;
     }
 }

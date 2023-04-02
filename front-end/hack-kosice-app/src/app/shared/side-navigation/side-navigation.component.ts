@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faHome, faTable, faWallet, faClipboardList, faChartLine } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faPlus, faWallet, faClipboardList, faChartLine } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-side-navigation',
@@ -12,7 +12,15 @@ export class SideNavigationComponent implements OnInit {
   faClipboardList = faClipboardList;
   faWallet = faWallet;
   faChartLine = faChartLine;
+  faPlus = faPlus;
+
+  isLearnMoreToggled = false;
+
   constructor() {}
 
   ngOnInit(): void {}
+
+  onClickToogleMore(){
+    this.isLearnMoreToggled = !this.isLearnMoreToggled;
+  }
 }

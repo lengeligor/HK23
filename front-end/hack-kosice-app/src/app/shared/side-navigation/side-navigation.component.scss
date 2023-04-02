@@ -1,5 +1,9 @@
 @import "../../../assets/colors";
 
+.active-link {
+  color: $active-icon-color;
+}
+
 .side-navbar {
   position: fixed;
   left: 0;
@@ -27,9 +31,55 @@
       &:hover {
         color: $active-icon-color;
       }
-
     }
+  }
+}
 
+.learn-more-container {
+  position: absolute;
+  min-width: 30vw;
+  min-height: 30vh;
+  top: 40vh;
+  left: 40px;
+  background: rgb(72, 23, 139);
+  background: linear-gradient(
+    128deg,
+    rgba(72, 23, 139, 1) 22%,
+    rgba(92, 143, 219, 1) 100%,
+    rgba(10, 112, 133, 1) 100%
+  );
+  border-radius: 0 40px 40px 40px;
+  color: $snow-white-color;
+  padding: 30% 20% 20% 20%;
+  text-align: center;
+  animation: pop-in-more 0.7s;
 
+  .logos_wrapper{
+    height: 70%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    align-items: center;
+
+    img{
+      width: 120px;
+      transition: 0.3s ease-in-out;
+
+      &:hover {
+        transform: scale(1.1);
+    }
+    }
+  }
+}
+
+@keyframes pop-in-more {
+  0% {
+    opacity: 0;
+    transform: translateX(-400px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
   }
 }

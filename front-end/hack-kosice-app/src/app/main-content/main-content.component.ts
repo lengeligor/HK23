@@ -23,6 +23,7 @@ import {
 } from 'chart.js';
 import { UserReport } from '../shared/models/userReport.model';
 import { MainServiceService } from '../shared/main-service.service';
+import { Transaction } from '../shared/models/transaction.model';
 
 Chart.register(LineController, LinearScale, PointElement, LineElement);
 
@@ -35,6 +36,8 @@ export class MainContentComponent implements OnInit {
   userReport$: UserReport;
   userYearBalance$: { key: string; value: number }[];
 
+  transactionList$: Transaction[];
+
   constructor(private mainService: MainServiceService) {}
 
   ngOnInit(): void {
@@ -45,6 +48,11 @@ export class MainContentComponent implements OnInit {
     this.mainService.currentUserYearBalanceState$.subscribe((yearBalance) => {
       this.userYearBalance$ = yearBalance;
     });
+
+    this.mainService.currentTransactionListState$.subscribe((transitions) => {
+      this.transactionList$ = transitions;
+    });
+
     const canvas = <HTMLCanvasElement>document.getElementById('donutChart');
     const ctx = canvas.getContext('2d');
 
@@ -58,8 +66,8 @@ export class MainContentComponent implements OnInit {
             this.userReport$.food,
             this.userReport$.transportation,
           ],
-          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#e7e6f9'],
-          hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#e7e6f9'],
+          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#6756ff'],
+          hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#6756ff'],
         },
       ],
     };

@@ -2,16 +2,32 @@
   <div class="main-icons">
     <fa-icon
       [routerLink]="['/dashboard']"
+      routerLinkActive="active-link"
       [icon]="faHome"
       style="color: #4363bc"
     ></fa-icon>
     <fa-icon
       [routerLink]="['/balance-preview']"
+      routerLinkActive="active-link"
       [icon]="faClipboardList"
     ></fa-icon>
-    <fa-icon [routerLink]="['/financial-experts']" [icon]="faWallet">
-      
+    <fa-icon
+      [routerLink]="['/financial-experts']"
+      routerLinkActive="active-link"
+      [icon]="faWallet"
+    >
     </fa-icon>
     <fa-icon [routerLink]="['/learning']"[icon]="faChartLine"></fa-icon>
+
+    <fa-icon routerLinkActive="active-link" [icon]="faChartLine"></fa-icon>
+    <fa-icon routerLinkActive="active-link" [icon]="faPlus" (click)="onClickToogleMore()"></fa-icon>
+    <div *ngIf="isLearnMoreToggled" class="learn-more-container">
+      <h2>You can contact our partners and learn more about financies!</h2>
+      <div class="logos_wrapper">
+        <img src="../../../assets/img/tb_logo.png" alt="Avatar" class="avatar" href="https://www.tatrabanka.sk/sk/personal/ucet-platby/open-banking/">
+        <img src="../../../assets/img/revolut.png" alt="Avatar" class="avatar" href="https://developer.revolut.com/">
+      </div>
+    </div>
+
   </div>
 </div>
