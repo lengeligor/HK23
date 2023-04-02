@@ -1,1 +1,20 @@
-<p>learning works!</p>
+
+<h1>Learning Q/A</h1>
+<div class="main">
+    
+
+    <div *ngFor="let container of containers" class="container">
+        <div class="main_text">
+        <h2>{{ container.title }}</h2>
+         <div *ngIf="container.isHidden" class="loading-spinner">
+         </div>
+        <button (click)="toggleHidden(container)">{{ container.isHidden ? 'Read more' : 'Read less' }}</button>
+        </div>
+        <p [hidden]="container.isHidden">{{ container.text }}</p>
+        <hr>
+      </div>
+
+    
+
+
+</div>

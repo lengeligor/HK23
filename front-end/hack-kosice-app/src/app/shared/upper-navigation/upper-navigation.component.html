@@ -1,10 +1,16 @@
 <div class="upper-nav" *ngIf="currentPerson">
+    
+    <img  src="../../../assets/img/logo.svg" alt="Avatar" class="logo">
+   
+
+    
     <fa-icon  id="notification" [icon]="faBell"></fa-icon>
     
     <img src="../../../assets/img/avatar.png" alt="Avatar" class="avatar">
     <p>{{currentPerson.name}} {{currentPerson.lastname}}</p>
     
     <i class="fa-solid fa-right-from-bracket icon"></i>
+    
     
   
 </div>
