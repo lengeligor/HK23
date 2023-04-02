@@ -28,9 +28,11 @@ h1{
 
 
   button{
-    color: $color-lable;
+    color: $snow-white-color;
     border: none;
-    background-color: transparent;
+    background-color: $active-icon-color;
+    padding: 10px;
+    border-radius: 10px;
   }
 
   .main p{

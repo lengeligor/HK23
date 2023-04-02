@@ -8,7 +8,7 @@
         <h2>{{ container.title }}</h2>
          <div *ngIf="container.isHidden" class="loading-spinner">
          </div>
-        <button (click)="toggleHidden(container)">{{ container.isHidden ? 'Read more' : 'Read less' }}</button>
+        <button (click)="toggleHidden(container)" class="more-button">{{ container.isHidden ? 'Read more' : 'Read less' }}</button>
         </div>
         <p [hidden]="container.isHidden">{{ container.text }}</p>
         <hr>
