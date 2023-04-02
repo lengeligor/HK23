@@ -2,18 +2,31 @@
 
 .main-content-container {
   position: absolute;
+  
   top: 0px;
   left: 0px;
   width: 100%;
   min-height: 100%;
   background-color: $main-background-color;
-  padding: 30px;
+  padding: 2vw;
+  padding-left: 4vw;
+  padding-right: 4vw;
 
-
+.chart_container{
+  display: flex;
+  width: 100%;
+  height: 20em;
+}
   h1 {
     font-family: "Poppins", sans-serif;
     font-weight: 700;
+    display: inline-block;
   }
+}
+
+.name{
+  font-size: 2.2em ;
+  margin-bottom: 20px;
 }
 
 #divChart{
@@ -22,7 +35,217 @@
   height: 400px;
 }
 
-.donut{
-  width: 400px; 
-  height: 400px;
+.tab{
+  width: 47%; 
+  padding: 1.5vw;
+  height: 100%;
+  border-radius: 20px;
+  background-color:$snow-white-color;
+
 }
+.donut_tab{
+  margin-right: 6%;
+}
+
+.donut{
+  padding: 10px;
+  width: 50%;
+
+}
+
+#lineChart{
+  width: 400px;
+}
+
+.line{
+  width: 65%;
+}
+
+.onli_text{
+  width: 35%;
+  text-align: left;
+}
+
+
+.onli_text p{
+  padding: 30px;
+}
+
+.line_tab{
+  padding: 1.5vw;
+  border-radius: 20px;
+  background-color:$snow-white-color;
+  text-align: right;
+  margin: auto;
+display: flex;
+  height: 24em;
+
+  margin-top: 4%;
+
+}
+
+#chart {
+  max-width: 650px;
+  margin: 35px auto;
+}
+
+
+
+.polozka{
+  display: flex;
+  margin-top: 10px;
+}
+
+.polozka h2 ,p,i{
+
+}
+
+.polozka .n1{
+  color: #f5d662;
+  background-color: #fcf7e0;
+
+}
+.polozka .n2{
+  color: #7ecfd9;
+  background-color: #f0fafc;
+  
+}
+.polozka .n3{
+  color: #4363be;
+  background-color: #ebeff8;
+  
+}
+
+
+.polozka i{
+ width: 12%;
+ height: 50px;
+ font-size: 27px;
+ border-radius: 5px;
+ text-align: center;
+ padding-top: 11px;
+}
+
+.polozka h2{
+ width:100%;
+ height: 30%;
+ margin: 0;
+ padding: 0;
+ left: 12%;
+ display: inline-block;
+}
+
+.polozka p{
+  width:100%;
+  height: 10%;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+
+}
+
+.polozka .pod{
+  width:68%;
+  padding-left: 7%;
+}
+
+.polozka h1{
+  width:20%;
+  height: 100%;
+  float: right;
+  text-align: right;
+
+}
+
+
+.tab .dropdown{
+width: 20%;
+}
+
+.tab h1{
+  
+
+}
+
+.hore{
+ display: flex;
+ justify-content: space-between;
+}
+
+
+
+.dropbtn {
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  font-size: 20px;
+
+}
+
+.dropdown {
+  padding: 0;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  min-width: 110px;
+  text-align: right;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {cursor: pointer;}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.content1{
+  display: flex;
+  height: 200px;
+  
+
+}
+
+.text{
+  width: 50%;
+  padding: 40px;
+  }
+
+  .text span{
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+
+  }
+
+  .s1{
+    color: #FF6384;
+    background-color: #FF6384;
+  }
+  .s2{
+    color: #36A2EB;
+    background-color: #36A2EB;
+  }
+  .s3{
+    color: #FFCE56;
+    background-color: #FFCE56;
+  }
+  .s4{
+    color: #6756ff;
+    background-color: #6756ff;
+  }
