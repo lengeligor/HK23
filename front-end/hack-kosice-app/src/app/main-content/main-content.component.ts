@@ -102,6 +102,7 @@ export class MainContentComponent implements OnInit {
     });
 
     const values = keys.map((key) => this.userYearBalance$[key]);
+    const lastValue: number = values.slice(-1)[0];
 
     const myChart = new Chart(ctx2, {
       type: 'line',
@@ -111,11 +112,21 @@ export class MainContentComponent implements OnInit {
           {
             label: 'My First Dataset',
             data: values,
-            borderColor: 'rgb(75, 192, 192)',
+            borderColor: this.getChartColor(lastValue),
             tension: 0.1,
           },
         ],
       },
     });
+  }
+
+  getChartColor(lastValue: number): string {
+    if (lastValue < 0) {
+      return 'red';
+    }
+    if (lastValue > 4000) {
+      return 'green';
+    }
+    return 'orange';
   }
 }
