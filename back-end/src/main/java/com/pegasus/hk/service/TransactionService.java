@@ -119,7 +119,7 @@ public class TransactionService {
             Long value = entry.getValue();
             message = message + key + ": " + value + " eur,";
         }
-        message = message + "Write 2-3 sentences in a first person.";
+        message = message + "Write 2-3 sentences.";
         messageRequest.setMessage(message);
         try {
             ChatGptResponse response = botClient.askQuestion(messageRequest);
