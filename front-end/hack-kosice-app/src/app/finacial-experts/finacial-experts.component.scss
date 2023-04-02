@@ -23,6 +23,7 @@ h1{
     border-radius: 20px;
     border: none;
     animation: pop-in 0.7s;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
 .card .detail{
@@ -90,4 +91,11 @@ button{
       transform: scale(1);
     }
   }
+
+  h1 {
+    font-weight: 700;
+    padding-top: 5%;
+    padding-left: 5%;
+  }
+  
   

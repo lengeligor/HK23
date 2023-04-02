@@ -14,7 +14,7 @@ h1{
   .main{
     padding: 3.5vw;
     height: 75vh; /* set a fixed height for the container */
-  overflow: auto;
+    overflow: auto;
   }
 
   .main_text{
@@ -35,4 +35,14 @@ h1{
 
   .main p{
     justify-content: center;
+  }
+
+  h1 {
+    font-weight: 700;
+    padding-top: 5%;
+    padding-left: 5%;
+  }
+  
+  hr{
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   }

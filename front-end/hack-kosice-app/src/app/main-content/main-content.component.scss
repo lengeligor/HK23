@@ -44,7 +44,7 @@
 
 }
 .donut_tab{
-  margin-right: 6%;
+  margin-right: 6%; box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
 .donut{
@@ -78,8 +78,8 @@
   text-align: right;
   margin: auto;
 display: flex;
-  height: 24em;
-
+  height: 30em;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   margin-top: 4%;
 
 }
@@ -89,9 +89,13 @@ display: flex;
   margin: 35px auto;
 }
 
+.list_tab{
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
 
 
 .polozka{
+  
   display: flex;
   margin-top: 10px;
 }
@@ -249,3 +253,10 @@ width: 20%;
     color: #6756ff;
     background-color: #6756ff;
   }
+
+  h1 {
+    font-weight: 700;
+
+
+  }
+  

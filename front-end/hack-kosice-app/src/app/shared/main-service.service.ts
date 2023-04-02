@@ -100,7 +100,7 @@ export class MainServiceService {
   getUserTransactions(id: number): Observable<Transaction[]> {
     return this.dataService
       .get<Transaction[]>(
-        `${this.restApi}transaction/person/${id}?page=0&size=13`
+        `${this.restApi}transaction/person/${id}?page=0&size=25`
       )
       .pipe(
         map((res) => {
