@@ -21,17 +21,17 @@
           <canvas id="donutChart"></canvas>
         </div>
         <div class="text">
-          <p><span class="s1">----</span> Shopping</p>
-          <p><span class="s2">----</span> Sport</p>
+          <p><span class="s1">----</span> Utilities</p>
+          <p><span class="s2">----</span> Shopping</p>
           <p><span class="s3">----</span> Food</p>
-          <p><span class="s4">----</span> Other</p>
+          <p><span class="s4">----</span> Transportation</p>
         </div>
       </div>
     </div>
 
     <div class="list_tab tab">
       <div class="hore">
-        <h1 class="name">Transactions</h1>
+        <h1 class="name">Last transactions</h1>
 
         <div class="dropdown">
           <button class="dropbtn">More info ></button>
@@ -45,28 +45,26 @@
       <div class="polozka">
         <i class="n1 fa-solid fa-pizza-slice"></i>
         <div class="pod">
-          <h2>Food</h2>
-          <p>datum</p>
+          <h2>{{transactionList$[0].subcategory}}</h2>
+          <p>{{transactionList$[0].date}}</p>
         </div>
-        <h1>-$</h1>
+        <h1>{{transactionList$[0].amount}}$</h1>
       </div>
       <div class="polozka">
         <i class="n2 fa-solid fa-coins"></i>
         <div class="pod">
-          <h2>Salary</h2>
-          <br />
-          <p>datum</p>
+          <h2>{{transactionList$[1].subcategory}}</h2>
+          <p>{{transactionList$[1].date}}</p>
         </div>
-        <h1>-20$</h1>
+        <h1>{{transactionList$[1].amount}}$</h1>
       </div>
       <div class="polozka">
         <i class="n3 fa-solid fa-basket-shopping"></i>
         <div class="pod">
-          <h2>Shopping</h2>
-          <br />
-          <p>datum</p>
+          <h2>{{transactionList$[2].subcategory}}</h2>
+          <p>{{transactionList$[2].date}}</p>
         </div>
-        <h1>-20$</h1>
+        <h1>{{transactionList$[2].amount}}$</h1>
       </div>
     </div>
   </div>

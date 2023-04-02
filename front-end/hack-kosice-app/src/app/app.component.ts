@@ -13,7 +13,7 @@ import { UserReport } from './shared/models/userReport.model';
 })
 export class AppComponent implements OnInit, OnDestroy {
   title = 'hack-kosice-app';
-  currentUserId: number = 1;
+  currentUserId: number = 4;
 
   $unsubscribe = new Subject();
 
@@ -31,39 +31,51 @@ export class AppComponent implements OnInit, OnDestroy {
     this._getUser(this.currentUserId);
     this._getUserReport(this.currentUserId);
     this._getUserYearBalance(this.currentUserId);
+    this._getTransactionList(this.currentUserId);
   }
 
   ngOnDestroy(): void {
     this.$unsubscribe.next;
-    this.$unsubscribe.complete()
+    this.$unsubscribe.complete();
   }
 
-  private _getUser(id: number): void{
-    this.mainService.getUser(id)
-    .pipe(takeUntil(this.$unsubscribe))
-    .subscribe((user) => {
-      this.person$ = user;
-       console.log(user);
-    });
+  private _getUser(id: number): void {
+    this.mainService
+      .getUser(id)
+      .pipe(takeUntil(this.$unsubscribe))
+      .subscribe((user) => {
+        this.person$ = user;
+        console.log(user);
+      });
   }
 
-  private _getUserReport(id: number): void{
-    this.mainService.getUserReport(id)
-    .pipe(takeUntil(this.$unsubscribe))
-    .subscribe((report) => {
-      this.userReport$ = report;
-       console.log(report);
-    });
+  private _getUserReport(id: number): void {
+    this.mainService
+      .getUserReport(id)
+      .pipe(takeUntil(this.$unsubscribe))
+      .subscribe((report) => {
+        this.userReport$ = report;
+        console.log(report);
+      });
   }
 
-  private _getUserYearBalance(id: number): void{
-    this.mainService.getUserYearBalance(id)
-    .pipe(takeUntil(this.$unsubscribe))
-    .subscribe((yearBalance) => {
-      this.userYearBalance$ = yearBalance;
-       console.log(yearBalance);
-    });
+  private _getUserYearBalance(id: number): void {
+    this.mainService
+      .getUserYearBalance(id)
+      .pipe(takeUntil(this.$unsubscribe))
+      .subscribe((yearBalance) => {
+        this.userYearBalance$ = yearBalance;
+        console.log(yearBalance);
+      });
   }
 
-  
+  private _getTransactionList(id: number): void {
+    this.mainService
+      .getUserTransactions(id)
+      .pipe(takeUntil(this.$unsubscribe))
+      .subscribe((transactionList) => {
+        this.transactionList$ = transactionList;
+        console.log(transactionList);
+      });
+  }
 }
