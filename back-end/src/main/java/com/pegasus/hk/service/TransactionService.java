@@ -1,16 +1,24 @@
 package com.pegasus.hk.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
+import javax.swing.text.DateFormatter;
 import javax.transaction.Transactional;
 
 import com.pegasus.hk.client.BotClient;
@@ -29,6 +37,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 
 import lombok.NonNull;
 
@@ -91,35 +100,72 @@ public class TransactionService {
         MessageRequest messageRequest = new MessageRequest();
         PersonDto personDto = personService.getPerson(id);
         HashMap<String, Long> sortedExpanses = new HashMap<>();
-        sortedExpanses.put("cestovanie", reportDto.getTravel());
-        sortedExpanses.put("úžitkové veci", reportDto.getUtilities());
-        sortedExpanses.put("doprava", reportDto.getTransportation());
-        sortedExpanses.put("nakupovanie", reportDto.getShopping());
-        sortedExpanses.put("darčeky", reportDto.getGifts());
-        sortedExpanses.put("pravidelné odbery(subscription)", reportDto.getSubscription());
-        sortedExpanses.put("jedlo", reportDto.getFood());
+        sortedExpanses.put("traveling", reportDto.getTravel());
+        sortedExpanses.put("utilities", reportDto.getUtilities());
+        sortedExpanses.put("transportation", reportDto.getTransportation());
+        sortedExpanses.put("shopping", reportDto.getShopping());
+        sortedExpanses.put("gifts", reportDto.getGifts());
+        sortedExpanses.put("subscription", reportDto.getSubscription());
+        sortedExpanses.put("food", reportDto.getFood());
         sortedExpanses = sortByValue(sortedExpanses);
-        String message = "sk: Aké rady by si dal " + personDto.getName() + " " + personDto.getLastname()
-                + ", ktorý je muž, má " + personDto.getAge() + " rokov, býva v " + personDto.getAddress().getMunicipality()+ ","
-                + personDto.getAddress().getState() + "a jeho finančná situácia za obdobie posledných "
-                + analysisDuration + " mesiacov je následovná : " + personDto.getName() + " má príjmy vo výške " + reportDto.getIncomes()
-                + ", výdaje vo výške " + reportDto.getExpenses() + ", jeho +/- bilancia je na úrovni " + reportDto.getRemainingFinances()
-                + "eur. Jeho výdaje podľa kategórii vyzerajú takto: ";
+        String message = "Give advices to " + personDto.getName() + " " + personDto.getLastname()
+                + ", which is male and he is " + personDto.getAge() + " years old, and he live in " + personDto.getAddress().getMunicipality()+ ","
+                + personDto.getAddress().getState() + "and his financial situation in last  "
+                + analysisDuration + " months is this : " + personDto.getName() + " has incomes " + reportDto.getIncomes()
+                + ", expanses " + reportDto.getExpenses() + ", and his balance (incomes-expanses) is " + reportDto.getRemainingFinances()
+                + "euros. His expanses look like that: ";
         for (Map.Entry<String, Long> entry : sortedExpanses.entrySet()) {
             String key = entry.getKey();
             Long value = entry.getValue();
             message = message + key + ": " + value + " eur,";
         }
-        message = message + "Napíš to v prvej osobe.";
+        message = message + "Write 2-3 sentences in a first person.";
         messageRequest.setMessage(message);
-        ChatGptResponse response = botClient.askQuestion(messageRequest);
-        Optional.ofNullable(response)
-                .flatMap(r -> Optional.ofNullable(r.getChoices()))
-                .ifPresent(choices -> {
-                    if (!choices.isEmpty()){
-                        reportDto.setMessage(choices.get(0).getText());
-                    }
-        });
+        try {
+            ChatGptResponse response = botClient.askQuestion(messageRequest);
+            Optional.ofNullable(response)
+                    .flatMap(r -> Optional.ofNullable(r.getChoices()))
+                    .ifPresent(choices -> {
+                        if (!choices.isEmpty()) {
+                            reportDto.setMessage(choices.get(0).getText());
+                        }
+                    });
+        } catch (HttpClientErrorException e){
+            reportDto.setMessage("Our advisor is temporary unavailable. Try later.");
+        }
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.now().minusMonths(1);
+        Transaction transactionPast = null;
+        while (transactionPast == null){
+            transactionPast = transactionRepository.findOne(QTransaction.transaction.date.eq(date.format(formatter))
+                    .and(QTransaction.transaction.personId.eq(id))).orElse(null);
+            date = date.minusDays(1);
+        }
+        Long balanceAfterPast = transactionPast.getBalanceAfter();
+        reportDto.setLastMonthSituationAtThisDay(balanceAfterPast);
+
+        /*List<Transaction> endOfMonthsTransactions = transactionRepository.getPersonYearlyBalance(id);
+        endOfMonthsTransactions = endOfMonthsTransactions.stream()
+                .filter(t ->t.getDate().contains(LocalDate.now().format(formatter).split("-")[1])
+                        || t.getDate().contains(LocalDate.now().minusMonths(1).format(formatter).split("-")[1]))
+                .collect(Collectors.toList());
+
+        try {
+            SimpleDateFormat formatter2 = new SimpleDateFormat("yyyy-MM-dd");
+            Date dateBefore = formatter2.parse(transactionPast.getDate());
+            Date dateAfter = formatter2.parse(endOfMonthsTransactions.get(0).getDate().contains(LocalDate.now().format(formatter).split("-")[1]) ? endOfMonthsTransactions.get(1).getDate() : endOfMonthsTransactions.get(0).getDate());
+            long dateBeforeInMs = dateBefore.getTime();
+            long dateAfterInMs = dateAfter.getTime();
+            long timeDiff = Math.abs(dateAfterInMs - dateBeforeInMs);
+            long daysDiff = TimeUnit.DAYS.convert(timeDiff, TimeUnit.MILLISECONDS);
+            System.out.println();
+        } catch (ParseException e){
+
+        }*/
+
+        //Long balanceAfterNow = lastTransaction.getBalanceAfter();
+
         return reportDto;
     }
 
