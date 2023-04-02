@@ -3,9 +3,15 @@
   <app-upper-navigation></app-upper-navigation>
   <app-upper-navigation [currentPerson]="person$"></app-upper-navigation>
   <app-side-advisor></app-side-advisor>
-  <div class="main-content">
+  <div *ngIf="!userReport$" class="loading-spinner">
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <div *ngIf="userReport$" class="main-content">
     <router-outlet></router-outlet>
-    
-  
   </div>
 </div>

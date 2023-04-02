@@ -30,6 +30,10 @@ export class MainServiceService {
   private readonly _currentUserReport = new BehaviorSubject<UserReport>(null);
   readonly currentUserReportState$ = this._currentUserReport.asObservable();
 
+  //user year balance
+  private readonly _currentUserYearBalance = new BehaviorSubject<{ key: string; value: number }[]>(null);
+  readonly currentUserYearBalanceState$ = this._currentUserYearBalance.asObservable();
+
   constructor(private dataService: DataService) {}
 
   setCurrentPerson(person: Person): void {
@@ -46,6 +50,10 @@ export class MainServiceService {
 
   setChatResponse(chatResponse: chatResponse): void {
     this._chatResponse.next(chatResponse);
+  }
+
+  setUserYearBalance(yearBalance: { key: string; value: number }[]): void {
+    this._currentUserYearBalance.next(yearBalance);
   }
 
   getUser(id: number): Observable<Person> {
@@ -86,6 +94,22 @@ export class MainServiceService {
         }),
         tap((res) => {
           this.setTransactions(res);
+        })
+      );
+  }
+
+  getUserYearBalance(id: number): Observable<{ key: string; value: number }[]> {
+    return this.dataService
+      .get<{ key: string; value: number }[]>(
+        `${this.restApi}transaction/person/${id}/year-balance`
+      )
+      .pipe(
+        map((res) => {
+          // console.log(res);
+          return res;
+        }),
+        tap((res) => {
+          this.setUserYearBalance(res);
         })
       );
   }
