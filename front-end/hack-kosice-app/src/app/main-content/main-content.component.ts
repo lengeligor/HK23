@@ -61,6 +61,23 @@ export class MainContentComponent implements OnInit {
       options: options,
     });
 
+
+    const ctx2 = document.getElementById('lineChart') as HTMLCanvasElement;
+    ctx2.height = 200;
+    const myChart = new Chart(ctx2, {
+      type: 'line',
+      data: {
+
+        labels: ['Jan', 'Feb', 'Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+        datasets: [{
+          label: 'My First Dataset',
+          data: [5, 10, 11,12,13,14,15,14,13,12,11,7,6,3],
+          borderColor: 'rgb(75, 192, 192)',
+          tension: 0.1
+        }]
+      }
+    });
+
     this.mainService.currentUserReportState$.subscribe((report) => {
       this.userReport$ = report;
       if (this.userReport$)
