@@ -3,7 +3,7 @@ export interface Transaction {
   personId: number;
   date: string;
   category: string;
-  subCategory: string;
+  subcategory: string;
   description: string;
   amount: string;
   type: string;
