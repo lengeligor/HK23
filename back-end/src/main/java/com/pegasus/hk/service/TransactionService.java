@@ -24,11 +24,6 @@ import com.pegasus.hk.model.request.MessageRequest;
 import com.pegasus.hk.model.response.ChatGptResponse;
 import com.pegasus.hk.repository.TransactionRepository;
 import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.types.dsl.Expressions;
-import com.querydsl.jpa.JPAExpressions;
-import com.querydsl.jpa.JPQLQueryFactory;
-import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.querydsl.core.types.dsl.Expressions.*;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -134,8 +129,7 @@ public class TransactionService {
 
         Collections.sort(list, new Comparator<Map.Entry<String, Long> >() {
             public int compare(Map.Entry<String, Long> o1,
-                               Map.Entry<String, Long> o2)
-            {
+                               Map.Entry<String, Long> o2) {
                 return (o1.getValue()).compareTo(o2.getValue());
             }
         });

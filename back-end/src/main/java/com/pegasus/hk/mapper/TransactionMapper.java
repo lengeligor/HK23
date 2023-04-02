@@ -56,15 +56,14 @@ public abstract class TransactionMapper {
                     incomes[0] += Long.parseLong(transaction.getAmount());
                 }
             }
-            reportDto.setTransportation(reportDto.getTransportation() * -1);
-            reportDto.setTravel(reportDto.getTravel() * -1);
-            reportDto.setUtilities(reportDto.getUtilities() * -1);
-            reportDto.setCategory(reportDto.getCategory() * -1);
-            reportDto.setShopping(reportDto.getShopping() * -1);
-            reportDto.setGifts(reportDto.getGifts() * -1);
-            reportDto.setShopping(reportDto.getShopping() * -1);
-            reportDto.setFood(reportDto.getFood() * -1);
         });
+        reportDto.setTransportation(reportDto.getTransportation() * -1);
+        reportDto.setTravel(reportDto.getTravel() * -1);
+        reportDto.setUtilities(reportDto.getUtilities() * -1);
+        reportDto.setCategory(reportDto.getCategory() * -1);
+        reportDto.setShopping(reportDto.getShopping() * -1);
+        reportDto.setGifts(reportDto.getGifts() * -1);
+        reportDto.setFood(reportDto.getFood() * -1);
         reportDto.setIncomes(incomes[0]);
         reportDto.setExpenses(expenses[0] * -1);
         reportDto.setRemainingFinances(incomes[0] - (expenses[0]*-1));
