@@ -8,5 +8,9 @@ GET /transaction/person/{id}?monthFilter=june -> vrati transakcie osoby, monthFi
 
 POST /bot/send -> requestBody = {"message": "tvoja otazka z fe"}
 
-GET /person/{id}/get-report -> id osoby ako path variable a ako mozny RequestParam analysisDuration ako cislo ktore udava 
+GET /transaction/person/{id}/get-report -> id osoby ako path variable a ako mozny RequestParam analysisDuration ako cislo ktore udava 
 pocet mesiacov kolkych sa tyka analyza
+
+GET /learn/get-themes -> temy pre learning section
+
+GET /learn?theme={nazov kapitoly} -> zobrazenie kontentu k teme
